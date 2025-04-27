@@ -1,0 +1,17 @@
+app:
+  version: '1.0.0'
+  features:
+    enableAudit: true
+    enableCache: true
+  
+security:
+  sessionTimeout: 3600
+  maxLoginAttempts: 5
+  
+assessment:
+  batchSize: 100
+  retryAttempts: 3
+  validationRules:
+    - type: 'residential'
+      minValue: 10000
+      maxValue: 10000000 

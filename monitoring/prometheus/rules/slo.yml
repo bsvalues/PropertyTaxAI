@@ -1,0 +1,14 @@
+groups:
+  - name: slo
+    rules:
+      - record: slo:assessment_success_ratio
+        expr: |
+          sum(rate(assessment_success_total[1h]))
+          /
+          sum(rate(assessment_total[1h]))
+      
+      - alert: SLOBreach
+        expr: slo:assessment_success_ratio < 0.995
+        for: 1h
+        labels:
+          severity: critical 

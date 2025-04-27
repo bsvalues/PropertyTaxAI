@@ -1,0 +1,12 @@
+logging:
+  level: ${LOG_LEVEL:-info}
+  format: json
+  outputs:
+    - type: file
+      path: /var/log/propertytaxai/app.log
+      rotate: true
+      maxSize: 100MB
+      maxFiles: 10
+    - type: elasticsearch
+      host: ${ELASTICSEARCH_HOST}
+      index: propertytaxai-logs 

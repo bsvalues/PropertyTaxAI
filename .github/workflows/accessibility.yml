@@ -1,0 +1,27 @@
+name: Accessibility Testing
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 0 1 * *'  # Run monthly
+
+jobs:
+  accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          node-version: '18'
+      - run: pnpm install
+      - name: Run Playwright Accessibility Tests
+        run: pnpm playwright test tests/accessibility.spec.ts
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: accessibility-results
+          path: playwright-report/ 
